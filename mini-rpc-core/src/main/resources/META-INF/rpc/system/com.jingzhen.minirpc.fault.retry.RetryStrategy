@@ -1,0 +1,2 @@
+no=com.jingzhen.minirpc.fault.retry.NoRetryStrategy
+fixedInterval=com.jingzhen.minirpc.fault.retry.FixedIntervalRetryStrategy

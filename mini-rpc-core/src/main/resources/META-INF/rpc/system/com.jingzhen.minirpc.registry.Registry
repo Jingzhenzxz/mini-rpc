@@ -1,0 +1,2 @@
+etcd=com.jingzhen.minirpc.registry.EtcdRegistry
+zookeeper=com.jingzhen.minirpc.registry.ZooKeeperRegistry

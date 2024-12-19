@@ -1,0 +1,4 @@
+failBack=com.jingzhen.minirpc.fault.tolerant.FailBackTolerantStrategy
+failFast=com.jingzhen.minirpc.fault.tolerant.FailFastTolerantStrategy
+failOver=com.jingzhen.minirpc.fault.tolerant.FailOverTolerantStrategy
+failSafe=com.jingzhen.minirpc.fault.tolerant.FailSafeTolerantStrategy

@@ -1,0 +1,3 @@
+roundRobin=com.jingzhen.minirpc.loadbalancer.RoundRobinLoadBalancer
+random=com.jingzhen.minirpc.loadbalancer.RandomLoadBalancer
+consistentHash=com.jingzhen.minirpc.loadbalancer.ConsistentHashLoadBalancer

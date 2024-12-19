@@ -1,0 +1,4 @@
+jdk=com.jingzhen.minirpc.serializer.JdkSerializer
+hessian=com.jingzhen.minirpc.serializer.HessianSerializer
+json=com.jingzhen.minirpc.serializer.JsonSerializer
+kryo=com.jingzhen.minirpc.serializer.KryoSerializer
