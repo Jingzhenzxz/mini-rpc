@@ -4,6 +4,7 @@ import io.vertx.core.Vertx;
 
 /**
  * Vertx HTTP 服务器
+ * 重点是指定请求处理器为 HttpServerHandler
  */
 public class VertxHttpServer implements HttpServer {
 

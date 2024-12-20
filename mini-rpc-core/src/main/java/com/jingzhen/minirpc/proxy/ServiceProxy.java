@@ -31,6 +31,7 @@ import java.util.Map;
 /**
  * 服务代理（JDK 动态代理）
  * 该类使用 JDK 动态代理实现对远程服务的调用代理，支持通过反射拦截方法调用，构造请求并发起远程调用。
+ * 只有RpcProviderBootstrap才会调用本类创建代理实例，注入到消费者的bean中。
  */
 public class ServiceProxy implements InvocationHandler {
 
@@ -61,7 +62,7 @@ public class ServiceProxy implements InvocationHandler {
         // 获取当前应用的 RPC 配置信息
         RpcConfig rpcConfig = RpcApplication.getRpcConfig();
 
-        // 获取注册中心实例
+        // 从RPC配置中获取注册中心实例
         Registry registry = RegistryFactory.getInstance(rpcConfig.getRegistryConfig().getRegistry());
 
         // 创建服务元信息对象
@@ -69,7 +70,7 @@ public class ServiceProxy implements InvocationHandler {
         serviceMetaInfo.setServiceName(serviceName);  // 设置服务名称
         serviceMetaInfo.setServiceVersion(RpcConstant.DEFAULT_SERVICE_VERSION);  // 设置服务版本（默认为默认版本）
 
-        // 从注册中心发现服务提供者，获取可用的服务地址列表
+        // 根据服务元信息从注册中心发现服务提供者，获取可用的服务地址列表
         List<ServiceMetaInfo> serviceMetaInfoList = registry.serviceDiscovery(serviceMetaInfo.getServiceKey());
 
         // 如果没有找到可用的服务提供者，抛出异常
@@ -78,7 +79,7 @@ public class ServiceProxy implements InvocationHandler {
         }
 
         // 3. 负载均衡
-        // 获取负载均衡器实例
+        // 从rpc配置中获取负载均衡器实例
         LoadBalancer loadBalancer = LoadBalancerFactory.getInstance(rpcConfig.getLoadBalancer());
 
         // 构建负载均衡需要的请求参数（此处以方法名称作为负载均衡的依据）
@@ -91,7 +92,7 @@ public class ServiceProxy implements InvocationHandler {
         // 4. 使用重试机制发送 RPC 请求
         RpcResponse rpcResponse;
         try {
-            // 获取重试策略
+            // 从rpc配置中获取重试策略
             RetryStrategy retryStrategy = RetryStrategyFactory.getInstance(rpcConfig.getRetryStrategy());
 
             // 执行重试机制，发起远程 RPC 请求
@@ -100,7 +101,7 @@ public class ServiceProxy implements InvocationHandler {
             );
         } catch (Exception e) {
             // 5. 容错机制
-            // 如果发生异常，执行容错策略
+            // 从rpc配置中获取容错策略。如果发生异常，执行容错策略
             TolerantStrategy tolerantStrategy = TolerantStrategyFactory.getInstance(rpcConfig.getTolerantStrategy());
             rpcResponse = tolerantStrategy.doTolerant(null, e);  // 容错处理
         }

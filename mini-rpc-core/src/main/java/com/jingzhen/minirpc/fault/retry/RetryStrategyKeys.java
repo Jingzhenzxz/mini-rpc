@@ -14,5 +14,4 @@ public interface RetryStrategyKeys {
      * 固定时间间隔
      */
     String FIXED_INTERVAL = "fixedInterval";
-
 }

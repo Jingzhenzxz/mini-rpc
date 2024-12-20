@@ -16,15 +16,16 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 /**
- * Vertx TCP 请求客户端
+ * Vertx TCP 请求客户端。ServiceProxy 中的 invoke 方法会调用该类，用于发送请求并接收响应。
  * <p>
  * 该类用于发送 TCP 请求并接收响应，使用 Vert.x 提供的网络客户端（NetClient）与远程 TCP 服务进行通信。
  * 它构造一个请求消息，发送到指定的服务端口，并等待服务端的响应。
+ * 客户端和服务端的区别是：客户端发送请求，接受响应；服务端接受请求，发送响应。
  */
 public class VertxTcpClient {
 
     /**
-     * 发送请求
+     * 发送请求。ServiceProxy 中的 invoke 方法会调用该方法，用于发送请求并接收响应。
      *
      * @param rpcRequest 请求消息对象，包含需要调用的服务信息、方法参数等
      * @param serviceMetaInfo 服务的元数据信息，包含服务的主机和端口等
@@ -40,7 +41,7 @@ public class VertxTcpClient {
         // 使用 CompletableFuture 来异步处理响应
         CompletableFuture<RpcResponse> responseFuture = new CompletableFuture<>();
 
-        // 连接到指定的服务端口和主机
+        // 连接到指定的服务端口和主机。serviceMetaInfo中的端口就是rpcConfig中设置的端口，这是在ServiceProxy中设置的。
         netClient.connect(serviceMetaInfo.getServicePort(), serviceMetaInfo.getServiceHost(),
                 result -> {
                     // 检查连接是否成功
@@ -85,7 +86,6 @@ public class VertxTcpClient {
                             }
                     );
                     socket.handler(bufferHandlerWrapper);  // 将处理器添加到 socket，用于处理接收到的数据
-
                 });
 
         // 等待响应，阻塞当前线程直到接收到响应

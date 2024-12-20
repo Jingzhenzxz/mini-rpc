@@ -31,7 +31,7 @@ public class ServiceMetaInfo {
 
     /**
      * 服务端口号
-     * 服务运行的端口号，用于与服务端通信。
+     * 服务运行的端口号，用于与服务端通信。RpcProviderBootstrap类中把它设置为了RpcConfig中的端口号，即8121
      */
     private Integer servicePort;
 

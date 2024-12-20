@@ -22,44 +22,29 @@ import java.util.concurrent.ConcurrentHashMap;
 public class SpiLoader {
 
     /**
-     * 存储已加载的类：接口名 =>（key => 实现类）
+     * 存储已加载的类：接口名 =>（key => 实现类）。load方法加载的类会存储在这里。
      */
     private static final Map<String, Map<String, Class<?>>> loaderMap = new ConcurrentHashMap<>();
 
     /**
-     * 对象实例缓存（避免重复 new），类路径 => 对象实例，单例模式
+     * 对象实例缓存（避免重复 new），类路径 => 对象实例，单例模式。getInstance方法会操作这个集合
      */
     private static final Map<String, Object> instanceCache = new ConcurrentHashMap<>();
 
     /**
-     * 系统 SPI 目录
+     * 本框架提供的 SPI 目录
      */
     private static final String RPC_SYSTEM_SPI_DIR = "META-INF/rpc/system/";
 
     /**
-     * 用户自定义 SPI 目录
+     * 使用者自定义的 SPI 目录
      */
     private static final String RPC_CUSTOM_SPI_DIR = "META-INF/rpc/custom/";
 
     /**
-     * 扫描路径
+     * 扫描路径。还有一个META-INF/services目录，这是Java SPI的标准目录。
      */
     private static final String[] SCAN_DIRS = new String[]{RPC_SYSTEM_SPI_DIR, RPC_CUSTOM_SPI_DIR};
-
-    /**
-     * 动态加载的类列表
-     */
-    private static final List<Class<?>> LOAD_CLASS_LIST = Arrays.asList(Serializer.class);
-
-    /**
-     * 加载所有类型
-     */
-    public static void loadAll() {
-        log.info("加载所有 SPI");
-        for (Class<?> aClass : LOAD_CLASS_LIST) {
-            load(aClass);
-        }
-    }
 
     /**
      * 获取某个接口的实例
@@ -167,12 +152,4 @@ public class SpiLoader {
         // 返回最终的 key -> Class 映射
         return keyClassMap;
     }
-
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-        loadAll();
-        System.out.println(loaderMap);
-        Serializer serializer = getInstance(Serializer.class, "e");
-        System.out.println(serializer);
-    }
-
 }

@@ -12,11 +12,14 @@ import java.io.IOException;
  * 协议消息解码器
  * 该类负责解码从网络接收到的协议消息。解码过程包括解析消息头、验证魔数、解析消息体，
  * 根据不同的消息类型将消息体反序列化成相应的对象。
+ * 客户端接受响应和服务端接受请求时要用到本类。
+ * 从buffer中读取header和body，然后根据header中的serializer字段选择合适的序列化器进行反序列化。最后返回组装好的协议消息。
  */
 public class ProtocolMessageDecoder {
 
     /**
      * 解码方法，负责将 Buffer 中的二进制数据解码成协议消息对象
+     * Buffer是一段可变的内存缓冲区，通常用于存储二进制数据。主要用于处理字节数据流，且支持高效的操作和非阻塞的 I/O 操作。
      *
      * @param buffer 接收到的网络数据缓存
      * @return 解码后的协议消息对象
@@ -47,6 +50,7 @@ public class ProtocolMessageDecoder {
         byte[] bodyBytes = buffer.getBytes(17, 17 + header.getBodyLength());
 
         // 根据消息头中的序列化方式，选择合适的序列化器进行消息体反序列化
+        // 注意前面设置了header的serializer字段，这里不是采用的默认值！不要看漏了。
         ProtocolMessageSerializerEnum serializerEnum = ProtocolMessageSerializerEnum.getEnumByKey(header.getSerializer());
         if (serializerEnum == null) {
             throw new RuntimeException("序列化消息的协议不存在");
@@ -55,6 +59,7 @@ public class ProtocolMessageDecoder {
         Serializer serializer = SerializerFactory.getInstance(serializerEnum.getValue());
 
         // 根据消息类型解析消息体
+        // 注意前面设置了header的type字段，这里不是采用的默认值！不要看漏了。
         ProtocolMessageTypeEnum messageTypeEnum = ProtocolMessageTypeEnum.getEnumByKey(header.getType());
         if (messageTypeEnum == null) {
             throw new RuntimeException("序列化消息的类型不存在");

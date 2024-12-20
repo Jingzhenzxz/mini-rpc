@@ -50,6 +50,7 @@ public class ConsistentHashLoadBalancer implements LoadBalancer {
             for (int i = 0; i < VIRTUAL_NODE_NUM; i++) {
                 // 计算虚拟节点的哈希值，并将其加入虚拟节点环
                 int hash = getHash(serviceMetaInfo.getServiceAddress() + "#" + i);
+                // 不同的哈希值，同一个节点
                 virtualNodes.put(hash, serviceMetaInfo);
             }
         }
@@ -61,7 +62,7 @@ public class ConsistentHashLoadBalancer implements LoadBalancer {
         // `ceilingEntry` 方法返回大于或等于给定哈希值的最小哈希值节点
         Map.Entry<Integer, ServiceMetaInfo> entry = virtualNodes.ceilingEntry(hash);
 
-        // 如果没有找到大于或等于请求哈希值的虚拟节点，则选择环首部的节点
+        // 如果没有找到大于或等于请求哈希值的虚拟节点，则选择环首部的节点。重点！
         if (entry == null) {
             entry = virtualNodes.firstEntry();
         }

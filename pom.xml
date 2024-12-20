@@ -14,8 +14,4 @@
         <module>mini-rpc-spring-boot-starter</module>
         <module>example-common</module>
     </modules>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
 </project>

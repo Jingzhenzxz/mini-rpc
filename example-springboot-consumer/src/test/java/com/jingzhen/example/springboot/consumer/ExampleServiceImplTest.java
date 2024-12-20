@@ -16,7 +16,7 @@ class ExampleServiceImplTest {
     private ExampleServiceImpl exampleService;
 
     @Test
-    void test1() {
+    void test() {
         exampleService.test();
     }
 }

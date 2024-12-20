@@ -9,6 +9,7 @@ import java.io.IOException;
 /**
  * 协议消息编码器
  * 该类负责将协议消息对象编码成二进制数据流（Buffer），以便通过网络传输。编码过程包括序列化消息头和消息体。
+ * 客户端发送请求和服务端返回响应时要用到本类。
  */
 public class ProtocolMessageEncoder {
 

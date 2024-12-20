@@ -39,7 +39,7 @@ public class ProtocolMessage<T> {
         private byte version;
 
         /**
-         * 序列化器
+         * 序列化器。byte是字节，不是比特！一个byte是8位！
          */
         private byte serializer;
 

@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 
 /**
- * TCP 请求处理器
+ * TCP 请求处理器。VertxTcpServer 中的 socket.connectHandler 会调用该类，用于处理接收到的 TCP 请求。
  * <p>
  * 该类负责处理接收到的 TCP 请求。具体来说，它接收一个 `NetSocket`（表示一个 TCP 连接），解析并处理该连接上的请求，执行相应的服务调用，
  * 最后将响应数据编码并发送回客户端。

@@ -6,7 +6,8 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.parsetools.RecordParser;
 
 /**
- * TCP 消息处理器包装
+ * TCP 消息处理器包装。TcpServerHandler和VertxTcpClient中都使用了TcpBufferHandlerWrapper，用于处理TCP数据包的半包和粘包问题。
+ * 因为Vert.x的TCP客户端和服务器都是基于异步事件驱动的，所以需要一个解析器来处理TCP数据包的半包和粘包问题。
  * <p>
  * 本类使用装饰者模式对原有的 `Buffer` 处理能力进行增强，解决了半包和粘包问题。
  * 它通过一个 `RecordParser` 来处理传入的字节流 `Buffer`，并将完整的消息交给原有的 `bufferHandler` 处理。

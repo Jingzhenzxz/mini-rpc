@@ -21,5 +21,4 @@ public class NoRetryStrategy implements RetryStrategy {
     public RpcResponse doRetry(Callable<RpcResponse> callable) throws Exception {
         return callable.call();
     }
-
 }

@@ -22,7 +22,7 @@ public class ExampleServiceImpl {
      */
     public void test() {
         User user = new User();
-        user.setName("jingzhen");
+        user.setName("mini-rpc");
         User resultUser = userService.getUser(user);
         System.out.println(resultUser.getName());
     }

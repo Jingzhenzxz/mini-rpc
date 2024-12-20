@@ -31,6 +31,8 @@ public class EtcdRegistry implements Registry {
     /**
      * 本机注册的节点 key 集合（用于维护续期）
      * 在注册到ETCD、unregister、destroy或心跳时使用
+     * key指节点，它在kvClient中对应的value的反序列化值是ServiceMetaInfo，服务元信息存在registryServiceCache中。key是ETCD_ROOT_PATH+服务元信息中几个信息的组合。
+     * 你中有我，我中有你。
      */
     private final Set<String> localRegisterNodeKeySet = new HashSet<>();
 
@@ -96,6 +98,7 @@ public class EtcdRegistry implements Registry {
         kvClient.put(key, value, putOption).get();  // 执行键值对的存储操作，并关联租约
 
         // 将注册的节点信息添加到本地缓存中，避免重复注册
+        // registerKey的例子为/rpc/com.jingzhen.example.common.service.UserService:1.0/localhost:8121
         localRegisterNodeKeySet.add(registerKey);
     }
 
@@ -179,6 +182,8 @@ public class EtcdRegistry implements Registry {
             @Override
             public void execute() {
                 // 遍历当前节点注册的所有服务的 key，尝试续签服务节点的租约
+                // key的例子为/rpc/com.jingzhen.example.common.service.UserService:1.0/localhost:8121
+                // 因为目前只有一个key，所以keyValues中也只有一个元素。
                 for (String key : localRegisterNodeKeySet) {
                     try {
                         // 通过 Etcd KV 客户端获取该服务节点的最新信息

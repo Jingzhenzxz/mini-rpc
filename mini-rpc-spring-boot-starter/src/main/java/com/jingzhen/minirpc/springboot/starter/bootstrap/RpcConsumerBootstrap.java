@@ -10,6 +10,8 @@ import java.lang.reflect.Field;
 
 /**
  * Rpc 服务消费者启动
+ * 如果没有 @RpcReference 注解，消费者需要自己写代理，即Proxy.newProxyInstance和InvocationHandler。
+ * 本类在扫描到有 @RpcReference 注解的字段时，自动编写了代理。并采用工厂模式进一步封装了创建代理的逻辑。
  */
 @Slf4j
 public class RpcConsumerBootstrap implements BeanPostProcessor {

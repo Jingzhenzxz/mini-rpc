@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 /**
  * 协议消息的序列化器枚举
+ * 为什么有key和value呢？因为在请求的Header中，我们用一个byte来表示序列化器，这个byte就是key，而value就是序列化器的名字
  */
 @Getter
 public enum ProtocolMessageSerializerEnum {

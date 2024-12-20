@@ -6,12 +6,12 @@ package com.jingzhen.minirpc.protocol;
 public interface ProtocolConstant {
 
     /**
-     * 消息头长度
+     * 消息头长度，默认是17
      */
     int MESSAGE_HEADER_LENGTH = 17;
 
     /**
-     * 协议魔数
+     * 协议魔数，用于标识协议，方便解析，固定值，1个字节。
      */
     byte PROTOCOL_MAGIC = 0x1;
 

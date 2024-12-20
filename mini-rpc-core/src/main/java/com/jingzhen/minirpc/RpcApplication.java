@@ -41,6 +41,7 @@ public class RpcApplication {
     /**
      * 默认初始化方法，加载默认配置
      * 当没有传入自定义配置时，尝试加载默认的配置文件
+     * 本框架暂未提供配置文件，因此回使用默认配置。
      */
     public static void init() {
         RpcConfig newRpcConfig;

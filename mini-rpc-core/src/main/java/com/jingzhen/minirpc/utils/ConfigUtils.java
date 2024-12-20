@@ -48,7 +48,7 @@ public class ConfigUtils {
         // 加载配置文件
         Props props = new Props(configFileBuilder.toString());
 
-        // 将配置文件中的数据映射到指定的配置类，并返回
+        // 将配置文件中的具有指定前缀的数据映射到指定的配置类tClass并返回。例如把配置文件中的rpc.name映射到RpcConfig的name属性
         return props.toBean(tClass, prefix);
     }
 }

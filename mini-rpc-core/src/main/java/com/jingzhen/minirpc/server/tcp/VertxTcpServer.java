@@ -40,14 +40,4 @@ public class VertxTcpServer {
             }
         });
     }
-
-    /**
-     * 主方法，启动 TCP 服务器并监听 8888 端口
-     *
-     * @param args 命令行参数
-     */
-    public static void main(String[] args) {
-        // 创建 VertxTcpServer 实例并启动服务器
-        new VertxTcpServer().doStart(8888);
-    }
 }

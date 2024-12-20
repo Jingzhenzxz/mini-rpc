@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * RPC 请求
+ * RPC 请求。给它加上一些Header就是我们自定义的协议消息ProtocolMessage
  */
 @Data
 @Builder
