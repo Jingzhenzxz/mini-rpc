@@ -16,5 +16,5 @@
 ps：可以遵循下述步骤使用etcdkeeper来查看etcd中注册的服务信息：
 1. 下载etcdkeep：https://github.com/evildecay/etcdkeeper/
 2. 启动etcdkeeper.exe。
-3. 访问http://127.0.0.1:8080/etcdkeeper/即可。
+3. 访问 http://127.0.0.1:8080/etcdkeeper/ 即可。
 ![etcdkeeper.png](doc/etcdkeeper.png)
