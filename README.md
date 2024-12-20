@@ -19,6 +19,7 @@ ps：可以遵循下述步骤使用etcdkeeper来查看etcd中注册的服务信�
 ```shell
 etcdkeeper.exe -p 端口号
 ```
-来指定端口。
+来指定端口。（需先切换到etcdkeeper.exe所在目录）
+
 3. 访问 http://127.0.0.1:8080/etcdkeeper/ 即可。
 ![etcdkeeper.png](doc/etcdkeeper.png)
