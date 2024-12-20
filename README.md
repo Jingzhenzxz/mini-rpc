@@ -9,7 +9,7 @@
 2. 启动etcd.exe。
 3. 运行example-springboot-provider中的ExampleSpringbootProviderApplication类中的main方法。
 ![run-provider-main.png](doc/run-provider-main.png)
-5. 运行example-springboot-consumer中的ExampleServiceImplTest类中的test1方法。
+5. 运行example-springboot-consumer中的ExampleServiceImplTest类中的test方法。
 ![run-consumer-test.png](doc/run-consumer-test.png)
 6. 若consumer输出“mini-rpc”，provider输出“用户名：mini-rpc”，则测试成功。
 
