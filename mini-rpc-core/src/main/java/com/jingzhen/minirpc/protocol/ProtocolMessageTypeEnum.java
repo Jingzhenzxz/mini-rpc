@@ -4,6 +4,7 @@ import lombok.Getter;
 
 /**
  * 协议消息的类型枚举
+ * @author ZXZ
  */
 @Getter
 public enum ProtocolMessageTypeEnum {

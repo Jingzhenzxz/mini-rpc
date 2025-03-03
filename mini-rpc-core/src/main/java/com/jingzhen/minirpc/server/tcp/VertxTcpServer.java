@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
  * <p>
  * 该类用于启动一个基于 Vert.x 的 TCP 服务器。通过 Vert.x 提供的 `NetServer`，它能够监听指定端口，并处理来自客户端的连接请求。
  * 服务器接收到请求后，会通过 `TcpServerHandler` 进行处理。
+ * @author ZXZ
  */
 @Slf4j  // Lombok 注解，自动生成日志记录器
 public class VertxTcpServer {

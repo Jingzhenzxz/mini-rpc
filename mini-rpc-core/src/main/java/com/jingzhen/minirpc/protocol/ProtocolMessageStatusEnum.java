@@ -4,6 +4,7 @@ import lombok.Getter;
 
 /**
  * 协议消息的状态枚举
+ * @author ZXZ
  */
 @Getter
 public enum ProtocolMessageStatusEnum {

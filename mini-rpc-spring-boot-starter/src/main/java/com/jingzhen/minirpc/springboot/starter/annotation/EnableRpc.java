@@ -12,6 +12,7 @@ import java.lang.annotation.Target;
 
 /**
  * 启用 Rpc 注解
+ * @author ZXZ
  */
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
@@ -20,8 +21,6 @@ public @interface EnableRpc {
 
     /**
      * 需要启动 server
-     *
-     * @return
      */
     boolean needServer() default true;
 }

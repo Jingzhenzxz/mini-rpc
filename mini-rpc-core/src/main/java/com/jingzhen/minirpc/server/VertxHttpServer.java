@@ -5,6 +5,7 @@ import io.vertx.core.Vertx;
 /**
  * Vertx HTTP 服务器
  * 重点是指定请求处理器为 HttpServerHandler
+ * @author ZXZ
  */
 public class VertxHttpServer implements HttpServer {
 
@@ -13,6 +14,7 @@ public class VertxHttpServer implements HttpServer {
      *
      * @param port
      */
+    @Override
     public void doStart(int port) {
         // 创建 Vert.x 实例
         Vertx vertx = Vertx.vertx();

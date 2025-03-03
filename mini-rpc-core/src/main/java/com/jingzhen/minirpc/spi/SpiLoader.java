@@ -1,14 +1,11 @@
 package com.jingzhen.minirpc.spi;
 
 import cn.hutool.core.io.resource.ResourceUtil;
-import com.jingzhen.minirpc.serializer.Serializer;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * SPI 加载器
  * 自定义实现，支持键值对映射
+ * @author ZXZ
  */
 @Slf4j
 public class SpiLoader {
@@ -24,12 +22,12 @@ public class SpiLoader {
     /**
      * 存储已加载的类：接口名 =>（key => 实现类）。load方法加载的类会存储在这里。
      */
-    private static final Map<String, Map<String, Class<?>>> loaderMap = new ConcurrentHashMap<>();
+    private static final Map<String, Map<String, Class<?>>> LOADER_MAP = new ConcurrentHashMap<>();
 
     /**
      * 对象实例缓存（避免重复 new），类路径 => 对象实例，单例模式。getInstance方法会操作这个集合
      */
-    private static final Map<String, Object> instanceCache = new ConcurrentHashMap<>();
+    private static final Map<String, Object> INSTANCE_CACHE = new ConcurrentHashMap<>();
 
     /**
      * 本框架提供的 SPI 目录
@@ -62,7 +60,7 @@ public class SpiLoader {
         String tClassName = tClass.getName();
 
         // 从缓存中获取该接口对应的 SPI 配置信息（key -> Class 映射）
-        Map<String, Class<?>> keyClassMap = loaderMap.get(tClassName);
+        Map<String, Class<?>> keyClassMap = LOADER_MAP.get(tClassName);
 
         // 如果未加载该接口的 SPI 配置信息，则抛出异常
         if (keyClassMap == null) {
@@ -81,10 +79,10 @@ public class SpiLoader {
         String implClassName = implClass.getName();
 
         // 如果实例缓存中没有该实现类的实例，则进行实例化
-        if (!instanceCache.containsKey(implClassName)) {
+        if (!INSTANCE_CACHE.containsKey(implClassName)) {
             try {
                 // 通过反射实例化实现类，并将实例放入缓存
-                instanceCache.put(implClassName, implClass.newInstance());
+                INSTANCE_CACHE.put(implClassName, implClass.newInstance());
             } catch (InstantiationException | IllegalAccessException e) {
                 // 如果实例化失败，抛出运行时异常并附加错误信息
                 String errorMsg = String.format("%s 类实例化失败", implClassName);
@@ -93,7 +91,7 @@ public class SpiLoader {
         }
 
         // 从缓存中返回已经实例化的对象，并进行类型转换
-        return (T) instanceCache.get(implClassName);
+        return (T) INSTANCE_CACHE.get(implClassName);
     }
 
     /**
@@ -133,7 +131,7 @@ public class SpiLoader {
                         // 确保当前行格式正确，即包含了一个键值对
                         if (strArray.length > 1) {
                             String key = strArray[0]; // 获取键
-                            String className = strArray[1]; // 获取类名
+                            String className = strArray[1]; // 获取完整类名
 
                             // 将键和类名映射存入 Map 中，类名通过反射转换为 Class 对象
                             keyClassMap.put(key, Class.forName(className));
@@ -147,7 +145,7 @@ public class SpiLoader {
         }
 
         // 将加载的 SPI 配置信息缓存到 loaderMap 中，以便后续快速访问
-        loaderMap.put(loadClass.getName(), keyClassMap);
+        LOADER_MAP.put(loadClass.getName(), keyClassMap);
 
         // 返回最终的 key -> Class 映射
         return keyClassMap;

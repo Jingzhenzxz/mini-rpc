@@ -7,6 +7,7 @@ import java.util.Map;
 
 /**
  * 负载均衡器（消费端使用）
+ * @author ZXZ
  */
 public interface LoadBalancer {
 
@@ -15,7 +16,6 @@ public interface LoadBalancer {
      *
      * @param requestParams       请求参数
      * @param serviceMetaInfoList 可用服务列表
-     * @return
      */
     ServiceMetaInfo select(Map<String, Object> requestParams, List<ServiceMetaInfo> serviceMetaInfoList);
 }

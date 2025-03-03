@@ -18,6 +18,7 @@ public class NoRetryStrategy implements RetryStrategy {
      * @return
      * @throws Exception
      */
+    @Override
     public RpcResponse doRetry(Callable<RpcResponse> callable) throws Exception {
         return callable.call();
     }

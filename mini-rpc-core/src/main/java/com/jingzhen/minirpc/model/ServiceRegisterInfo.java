@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * 服务注册信息类
+ * @author ZXZ
  */
 @Data
 @AllArgsConstructor

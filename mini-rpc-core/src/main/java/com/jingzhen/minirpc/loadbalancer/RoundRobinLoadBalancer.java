@@ -8,6 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 轮询负载均衡器
+ * @author ZXZ
  */
 public class RoundRobinLoadBalancer implements LoadBalancer {
 

@@ -32,6 +32,7 @@ import java.util.Map;
  * 服务代理（JDK 动态代理）
  * 该类使用 JDK 动态代理实现对远程服务的调用代理，支持通过反射拦截方法调用，构造请求并发起远程调用。
  * 只有RpcProviderBootstrap才会调用本类创建代理实例，注入到消费者的bean中。
+ * @author ZXZ
  */
 public class ServiceProxy implements InvocationHandler {
 

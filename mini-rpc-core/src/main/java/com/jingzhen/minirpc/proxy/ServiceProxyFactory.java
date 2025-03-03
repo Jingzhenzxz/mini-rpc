@@ -6,6 +6,7 @@ import java.lang.reflect.Proxy;
 
 /**
  * 服务代理工厂（工厂模式，用于创建代理对象）
+ * @author ZXZ
  */
 public class ServiceProxyFactory {
 

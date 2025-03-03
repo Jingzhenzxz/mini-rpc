@@ -8,6 +8,7 @@ import java.util.Random;
 
 /**
  * 随机负载均衡器
+ * @author ZXZ
  */
 public class RandomLoadBalancer implements LoadBalancer {
 

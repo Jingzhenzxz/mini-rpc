@@ -50,7 +50,7 @@ public class ProtocolMessageDecoder {
         byte[] bodyBytes = buffer.getBytes(17, 17 + header.getBodyLength());
 
         // 根据消息头中的序列化方式，选择合适的序列化器进行消息体反序列化
-        // 注意前面设置了header的serializer字段，这里不是采用的默认值！不要看漏了。
+        // 注意前面设置了header的serializer字段，所以这里不是采用的默认值！不要看漏了。
         ProtocolMessageSerializerEnum serializerEnum = ProtocolMessageSerializerEnum.getEnumByKey(header.getSerializer());
         if (serializerEnum == null) {
             throw new RuntimeException("序列化消息的协议不存在");
@@ -59,7 +59,7 @@ public class ProtocolMessageDecoder {
         Serializer serializer = SerializerFactory.getInstance(serializerEnum.getValue());
 
         // 根据消息类型解析消息体
-        // 注意前面设置了header的type字段，这里不是采用的默认值！不要看漏了。
+        // 注意前面设置了header的type字段，所以这里不是采用的默认值！不要看漏了。
         ProtocolMessageTypeEnum messageTypeEnum = ProtocolMessageTypeEnum.getEnumByKey(header.getType());
         if (messageTypeEnum == null) {
             throw new RuntimeException("序列化消息的类型不存在");

@@ -2,6 +2,7 @@ package com.jingzhen.minirpc.protocol;
 
 /**
  * 协议常量
+ * @author ZXZ
  */
 public interface ProtocolConstant {
 

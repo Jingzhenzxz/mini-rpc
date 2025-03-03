@@ -4,6 +4,7 @@ import com.jingzhen.minirpc.spi.SpiLoader;
 
 /**
  * 容错策略工厂（工厂模式，用于获取容错策略对象）
+ * @author ZXZ
  */
 public class TolerantStrategyFactory {
 

@@ -10,6 +10,7 @@ import java.lang.annotation.Target;
 
 /**
  * 服务提供者注解（用于注册服务）
+ * @author ZXZ
  */
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

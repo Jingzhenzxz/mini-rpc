@@ -5,6 +5,7 @@ import lombok.Data;
 
 /**
  * RPC 框架注册中心配置
+ * @author ZXZ
  */
 @Data
 public class RegistryConfig {

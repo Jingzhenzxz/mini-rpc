@@ -11,6 +11,7 @@ import io.vertx.core.parsetools.RecordParser;
  * <p>
  * 本类使用装饰者模式对原有的 `Buffer` 处理能力进行增强，解决了半包和粘包问题。
  * 它通过一个 `RecordParser` 来处理传入的字节流 `Buffer`，并将完整的消息交给原有的 `bufferHandler` 处理。
+ * @author ZXZ
  */
 public class TcpBufferHandlerWrapper implements Handler<Buffer> {
 

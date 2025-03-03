@@ -91,6 +91,7 @@ public class EtcdRegistry implements Registry {
         String registerKey = ETCD_ROOT_PATH + serviceMetaInfo.getServiceNodeKey();  // 使用服务节点的键作为 Etcd 中的注册键
         ByteSequence key = ByteSequence.from(registerKey, StandardCharsets.UTF_8);  // 键
         // 值是整个serviceMetaInfo，serviceMetaInfo中包含key。
+        // 因为这里用的是JSON序列化，所以下面heartBeat中也是用JSON进行的反序列化。
         ByteSequence value = ByteSequence.from(JSONUtil.toJsonStr(serviceMetaInfo), StandardCharsets.UTF_8);  // 值，使用 JSON 格式存储服务元数据
 
         // 将键值对与租约关联起来，设置过期时间为租约的有效期

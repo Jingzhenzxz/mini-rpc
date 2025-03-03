@@ -6,6 +6,7 @@ import java.util.Map;
 
 /**
  * 快速失败 - 容错策略（立刻通知外层调用方）
+ * @author ZXZ
  */
 public class FailFastTolerantStrategy implements TolerantStrategy {
 

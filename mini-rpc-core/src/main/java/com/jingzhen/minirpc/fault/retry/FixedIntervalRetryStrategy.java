@@ -22,6 +22,7 @@ public class FixedIntervalRetryStrategy implements RetryStrategy {
      * @throws ExecutionException 如果执行任务时抛出异常
      * @throws RetryException     如果重试失败，最终抛出的异常
      */
+    @Override
     public RpcResponse doRetry(Callable<RpcResponse> callable) throws ExecutionException, RetryException {
         // 创建一个 Retryer 对象，用于执行重试逻辑
         Retryer<RpcResponse> retryer = RetryerBuilder.<RpcResponse>newBuilder()

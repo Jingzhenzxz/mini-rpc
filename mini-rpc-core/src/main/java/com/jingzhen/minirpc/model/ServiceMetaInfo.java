@@ -6,6 +6,7 @@ import lombok.Data;
 
 /**
  * 服务元信息（注册信息）
+ * @author ZXZ
  */
 @Data // Lombok 注解，自动生成 getter、setter、toString、equals 和 hashCode 方法
 public class ServiceMetaInfo {

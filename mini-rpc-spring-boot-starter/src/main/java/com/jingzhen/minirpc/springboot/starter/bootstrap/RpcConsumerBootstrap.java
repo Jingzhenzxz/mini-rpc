@@ -53,6 +53,10 @@ public class RpcConsumerBootstrap implements BeanPostProcessor {
 
                 try {
                     // 将生成的代理对象注入到当前字段中
+                    // 例如
+                    //     @RpcReference
+                    //     private UserService userService;
+                    // 这里就会把userService替换为userService的代理对象
                     field.set(bean, proxyObject);
                     // 注入完后，恢复字段的可访问性
                     field.setAccessible(false);

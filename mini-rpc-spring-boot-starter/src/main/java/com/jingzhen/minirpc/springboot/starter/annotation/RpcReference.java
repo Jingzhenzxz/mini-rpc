@@ -12,6 +12,7 @@ import java.lang.annotation.Target;
 
 /**
  * 服务消费者注解（用于注入服务）
+ * @author ZXZ
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)

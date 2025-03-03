@@ -11,6 +11,7 @@ import java.util.TreeMap;
  * 该类实现了基于一致性哈希算法的负载均衡策略。
  * 一致性哈希是一种将服务节点映射到哈希环的算法，常用于分布式系统中的负载均衡。
  * 它通过将每个服务节点和虚拟节点映射到一个哈希环上，并根据请求的哈希值选择对应的服务节点。
+ * @author ZXZ
  */
 public class ConsistentHashLoadBalancer implements LoadBalancer {
 
